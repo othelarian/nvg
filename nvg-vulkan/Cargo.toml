@@ -1,0 +1,21 @@
+[package]
+name = "nvg-vulkan"
+version = "0.5.4"
+authors = ["Sunli <scott_s829@163.com>", "othelarian <le.maitre.killian@gmail.com]
+edition = "2018"
+keywords = ["nanovg", "vulkan"]
+description = "NVG Renderer for Vulkan"
+license = "MIT"
+publish = true
+homepage = "https://github.com/sunli829/nvg"
+repository = "https://github.com/sunli829/nvg"
+
+[dependencies]
+nvg = { version = "0.5.11", path = "../" }
+#slab = "0.4.2"
+anyhow = "1.0.34"
+
+[dev-dependencies]
+#winit
+chrono = "0.4.10"
+#rand = "
