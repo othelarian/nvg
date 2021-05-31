@@ -487,7 +487,7 @@ impl PathCache {
                                 u1,
                             );
                         }
-                        LineCap::Round => {
+                        LineCap::Square => {
                             dst = butt_cap_end(
                                 dst,
                                 p1.as_mut().unwrap(),
@@ -500,7 +500,7 @@ impl PathCache {
                                 u1,
                             );
                         }
-                        LineCap::Square => {
+                        LineCap::Round => {
                             dst = round_cap_end(
                                 dst,
                                 p1.as_mut().unwrap(),
@@ -802,7 +802,7 @@ unsafe fn round_join(
             let u = (i as f32) / ((n - 1) as f32);
             let a = a0 + u * (a1 - a0);
             let lx = p1.xy.x + a.cos() * lw;
-            let ly = p1.xy.y + a.cos() * lw;
+            let ly = p1.xy.y + a.sin() * lw;
 
             *dst = Vertex::new(lx, ly, lu, 1.0);
             dst = dst.add(1);
@@ -983,8 +983,8 @@ unsafe fn butt_cap_end(
     u0: f32,
     u1: f32,
 ) -> *mut Vertex {
-    let px = p.xy.x - dx * d;
-    let py = p.xy.y - dy * d;
+    let px = p.xy.x + dx * d;
+    let py = p.xy.y + dy * d;
     let dlx = dy;
     let dly = -dx;
 

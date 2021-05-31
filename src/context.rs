@@ -174,7 +174,13 @@ impl<T: Into<Color> + Clone> From<T> for Paint {
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 pub enum Solidity {
     Solid,
-    Hole,
+    Hole
+}
+
+#[derive(Debug, Copy, Clone, Eq, PartialEq)]
+pub enum ClockWise {
+    CCW,
+    CW
 }
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
@@ -801,7 +807,7 @@ impl<R: Renderer> Context<R> {
                 pt1.y + d0.y * d + -d0.x * radius,
                 d0.x.atan2(-d0.y),
                 -d1.x.atan2(d1.y),
-                Solidity::Hole,
+                ClockWise::CW
             )
         } else {
             (
@@ -809,7 +815,7 @@ impl<R: Renderer> Context<R> {
                 pt1.y + d0.y * d + d0.x * radius,
                 -d0.x.atan2(d0.y),
                 d1.x.atan2(-d1.y),
-                Solidity::Solid,
+                ClockWise::CCW
             )
         };
 
@@ -824,12 +830,12 @@ impl<R: Renderer> Context<R> {
         self.commands.push(Command::Solidity(dir));
     }
 
-    pub fn arc<P: Into<Point>>(&mut self, cp: P, radius: f32, a0: f32, a1: f32, dir: Solidity) {
+    pub fn arc<P: Into<Point>>(&mut self, cp: P, radius: f32, a0: f32, a1: f32, dir: ClockWise) {
         let cp = cp.into();
         let move_ = self.commands.is_empty();
 
         let mut da = a1 - a0;
-        if dir == Solidity::Hole {
+        if dir == ClockWise::CW {
             if da.abs() >= PI * 2.0 {
                 da = PI * 2.0;
             } else {
@@ -851,7 +857,7 @@ impl<R: Renderer> Context<R> {
         let hda = (da / (ndivs as f32)) / 2.0;
         let mut kappa = (4.0 / 3.0 * (1.0 - hda.cos()) / hda.sin()).abs();
 
-        if dir == Solidity::Solid {
+        if dir == ClockWise::CCW {
             kappa = -kappa;
         }
 

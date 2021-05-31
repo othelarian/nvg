@@ -10,7 +10,7 @@ pub mod renderer;
 
 pub use color::*;
 pub use context::{
-    Align, BasicCompositeOperation, BlendFactor, CompositeOperation, Context, Gradient, ImageFlags,
+    Align, BasicCompositeOperation, BlendFactor, ClockWise, CompositeOperation, Context, Gradient, ImageFlags,
     ImageId, ImagePattern, LineCap, LineJoin, Paint, Solidity, TextMetrics,
 };
 pub use fonts::FontId;
