@@ -797,7 +797,7 @@ unsafe fn round_join(
         *dst = Vertex::new(rx0, ry0, ru, 1.0);
         dst = dst.add(1);
 
-        let n = ((((a0 - a1) / PI) * (ncap as f32)).ceil() as i32).clamped(2, ncap as i32);
+        let n = ((((a1 - a0) / PI) * (ncap as f32)).ceil() as i32).clamped(2, ncap as i32);
         for i in 0..n {
             let u = (i as f32) / ((n - 1) as f32);
             let a = a0 + u * (a1 - a0);
