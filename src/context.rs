@@ -697,8 +697,7 @@ impl<R: Renderer> Context<R> {
             Rect::new(
                 Point::new(pxform.0[4] - tex, pxform.0[5] - tey),
                 Extent::new(tex * 2.0, tey * 2.0),
-            )
-            .intersect(rect),
+            ).intersect(rect)
         );
     }
 

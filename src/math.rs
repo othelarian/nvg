@@ -93,13 +93,8 @@ impl Rect {
     }
 
     pub fn intersect(self, rect: Rect) -> Rect {
-        let Rect {
-            xy: Point { x: ax, y: ay },
-            size: Extent {
-                width: aw,
-                height: ah,
-            },
-        } = rect;
+        let Point {x: ax, y: ay} = self.xy;
+        let Extent {width: aw, height: ah} = self.size;
 
         let Rect {
             xy: Point { x: bx, y: by },
